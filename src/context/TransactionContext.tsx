@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
-import { Transaction } from '../types'
+import { createContext, useContext, useState } from 'react'
+import type { ReactNode } from 'react'
+import type { Transaction } from '../types'
 
 interface TransactionContextType {
   transactions: Transaction[]
