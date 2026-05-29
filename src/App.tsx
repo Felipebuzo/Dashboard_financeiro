@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sidebar } from './components/sidebar'
 import { SummaryCards } from './components/SummaryCards'
 import { TransactionList } from './components/TransactionList'
@@ -10,6 +10,17 @@ import type { Summary } from './types'
 export default function App() {
   const [currentPage, setCurrentPage] = useState('dashboard')
   const { transactions } = useTransactions()
+
+  const [dollarRate, setDollarRate] = useState(0)
+
+useEffect(() => {
+  fetch('https://economia.awesomeapi.com.br/last/USD-BRL')
+    .then(res => res.json())
+    .then(data => {
+      setDollarRate(Number(data.USDBRL.bid))
+    })
+    .catch(() => setDollarRate(0))
+}, [])
 
   const summary: Summary = {
     totalIncome: transactions
@@ -34,7 +45,7 @@ export default function App() {
         {currentPage === 'dashboard' && (
           <div>
             <h1 className="text-lg font-semibold text-gray-800 mb-6">Dashboard</h1>
-            <SummaryCards summary={summary} dollarRate={0} />
+           <SummaryCards summary={summary} dollarRate={dollarRate} />
             <CategoryChart />
           </div>
         )}
