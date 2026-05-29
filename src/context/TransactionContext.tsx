@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import type { Transaction } from '../types'
 
@@ -13,7 +13,14 @@ export const TransactionContext = createContext<TransactionContextType | undefin
 
 
 export function TransactionProvider({ children }: { children: ReactNode }) {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+  const saved = localStorage.getItem('fintrack-transactions')
+  return saved ? JSON.parse(saved) : []
+})
+
+useEffect(() => {
+  localStorage.setItem('fintrack-transactions', JSON.stringify(transactions))
+}, [transactions])
 
   function addTransaction(transaction: Transaction) {
     setTransactions(prev => [...prev, transaction])
