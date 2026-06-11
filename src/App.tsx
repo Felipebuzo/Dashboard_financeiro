@@ -38,7 +38,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
       <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
 
       <main className="flex-1 overflow-y-auto p-8">
@@ -64,6 +64,19 @@ useEffect(() => {
           </div>
         )}
       </main>
+
+
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex justify-around p-3">
+  <button onClick={() => setCurrentPage('dashboard')} className={`text-xs flex flex-col items-center gap-1 ${currentPage === 'dashboard' ? 'text-green-600' : 'text-gray-400'}`}>
+    <span>📊</span>Dashboard
+  </button>
+  <button onClick={() => setCurrentPage('transactions')} className={`text-xs flex flex-col items-center gap-1 ${currentPage === 'transactions' ? 'text-green-600' : 'text-gray-400'}`}>
+    <span>📋</span>Transações
+  </button>
+  <button onClick={() => setCurrentPage('add')} className={`text-xs flex flex-col items-center gap-1 ${currentPage === 'add' ? 'text-green-600' : 'text-gray-400'}`}>
+    <span>➕</span>Adicionar
+  </button>
+</nav>
     </div>
   )
 }

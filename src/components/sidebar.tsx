@@ -5,7 +5,7 @@ interface SidebarProps {
 
 export function Sidebar({ currentPage, onNavigate }: SidebarProps) {
   return (
-    <aside className="w-64 h-screen bg-white border-r border-gray-100 flex flex-col p-4">
+    <aside className="hidden lg:flex w-64 h-screen bg-white border-r border-gray-100 flex-col p-4">
       <div className="flex items-center gap-2 mb-8">
         <span className="text-2xl">💰</span>
         <h1 className="text-xl font-semibold text-gray-800">FinTrack</h1>
